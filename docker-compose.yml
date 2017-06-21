@@ -36,3 +36,8 @@ services:
             - "8081:80"
         links:
             - database:db
+
+networks:
+    default:
+        external:
+            name: nginx_proxy
