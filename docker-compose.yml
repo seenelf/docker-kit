@@ -27,6 +27,8 @@ services:
             - ./docker/sql-binary:/var/lib/mysql
         ports:
             - '33061:3306'
+    redis:
+        image: redis:alpine
 
 networks:
     default:
