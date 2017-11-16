@@ -1,16 +1,19 @@
 version: '3'
 services:
     web:
+        container_name: project_name-web
         build:
             context: ./
             dockerfile: ./docker/nginx/nginx.docker
         volumes:
             - ./:/var/www
         ports:
-            - '9000:80'
+            - 9000:80
         links:
             - php
+
     php:
+        container_name: project_name-php
         build:
             context: ./
             dockerfile: ./docker/php7.docker
@@ -18,19 +21,11 @@ services:
             - ./:/var/www
 
     db:
+        container_name: project_name-db
         image: mysql:5.7
-        env_file: .env
+        environment:
+            - MYSQL_DATABASE=project_name
+            - MYSQL_ROOT_PASSWORD=password
         volumes:
-            # add database dump in the folder, docker will dump it into the db
-            - ./docker/sql-dump:/docker-entrypoint-initdb.d
-            # keep database binary outside container
             - ./docker/sql-binary:/var/lib/mysql
-        ports:
-            - '33061:3306'
-    redis:
-        image: redis:alpine
 
-networks:
-    default:
-        external:
-            name: nginx_proxy
