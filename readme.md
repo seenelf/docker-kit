@@ -24,3 +24,9 @@
     don't forget to rebuild your docker image if you change any config.
 - for database host you need to use `db` instead of `localhost`
 - check [http://localhost:9000/adminer.php](http://localhost:9000/adminer.php) to see if it works
+
+#### Run php artisan
+
+- check your php_container name using command `docker-compose ps`
+- execute command i.e. `docker exec -it project_name-php bash` replace `project_name-php` which your php_container_name from the previous output.
+- now you are inside the container you can use `php artisan` from here.
