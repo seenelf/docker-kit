@@ -22,5 +22,5 @@
 
 - by default mysql password is set by `docker-compose.yml` feel free to update also database name.
     don't forget to rebuild your docker image if you change any config.
-- for database host value you need to use `db` instead of `localhost`
+- for database host you need to use `db` instead of `localhost`
 - check [http://localhost:9000/adminer.php](http://localhost:9000/adminer.php) to see if it works
