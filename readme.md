@@ -6,12 +6,12 @@
 #### Run
 
 - make sure you did not run multiple docker projects on the same port (9000) otherwise it will not work.
-- start docker by execute command `docker-composer up -d` on your project root.
+- start docker by execute command `docker-compose up -d` on your project root.
 - check [http://localhost:9000](http://localhost:9000) to see if it works
 
 #### Shutdown
 
-- execute command `docker-composer kill` on your project root.
+- execute command `docker-compose kill` on your project root.
 
 #### Install custom php module
 
