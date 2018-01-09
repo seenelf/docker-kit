@@ -1,31 +1,41 @@
 version: '3'
 services:
-    web:
-        container_name: project_name-web
-        build:
-            context: ./
-            dockerfile: ./docker/nginx/nginx.docker
-        volumes:
-            - ./:/var/www
-        ports:
-            - 9000:80
-        links:
-            - php
 
-    php:
-        container_name: project_name-php
-        build:
-            context: ./
-            dockerfile: ./docker/php7.docker
-        volumes:
-            - ./:/var/www
+  web-nginx:
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/DockerFile
+    volumes:
+      - ./:/var/www
+    environment:
+      - VIRTUAL_HOST=ldocker-kit-nginx.com
+    links:
+      - php
 
-    db:
-        container_name: project_name-db
-        image: mysql:5.7
-        environment:
-            - MYSQL_DATABASE=project_name
-            - MYSQL_ROOT_PASSWORD=password
-        volumes:
-            - ./docker/sql-binary:/var/lib/mysql
+  web-apache:
+    build:
+      context: ./
+      dockerfile: ./docker/apache2/DockerFile
+    volumes:
+      - ./:/var/www
+    environment:
+      - VIRTUAL_HOST=ldocker-kit-apache.com
+    links:
+      - php
 
+  php:
+    build:
+      context: ./
+      dockerfile: ./docker/php/7.2/Dockerfile
+    volumes:
+      - ./:/var/www
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+
+networks:
+  default:
+    external:
+      name: global_network
